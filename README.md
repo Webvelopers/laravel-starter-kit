@@ -47,3 +47,15 @@ php artisan key:generate
 php artisan migrate
 composer run dev
 ```
+
+## Fix Bugs
+
+```bash
+composer run fix
+```
+
+## Run Tests
+
+```bash
+composer run test
+```
