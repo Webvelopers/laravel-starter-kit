@@ -3,9 +3,11 @@
 declare(strict_types=1);
 
 use App\Enums\UserRole;
+use App\Models\AppSetting;
 use App\Models\User;
 use App\Models\UserRoleAssignment;
 use Database\Seeders\AdminUserSeeder;
+use Database\Seeders\AppSettingsSeeder;
 use Database\Seeders\DatabaseSeeder;
 use Database\Seeders\StandardUserSeeder;
 
@@ -21,6 +23,12 @@ it('creates the starter admin user when the database seeder runs', function (): 
         ->and($user?->name)->toBe('Starter Admin')
         ->and($user?->email_verified_at)->not->toBeNull()
         ->and(UserRoleAssignment::roleFor($user))->toBe(UserRole::Admin);
+});
+
+it('seeds human verification as enabled by default', function (): void {
+    seed(AppSettingsSeeder::class);
+
+    expect(AppSetting::registrationHumanVerificationEnabled())->toBeTrue();
 });
 
 it('creates additional administration profiles', function (): void {

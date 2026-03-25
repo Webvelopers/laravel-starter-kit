@@ -274,6 +274,21 @@ return [
             'recovery_code' => 'Codigo de recuperacion',
             'submit' => 'Validar acceso',
         ],
+        'password_toggle' => [
+            'show' => 'Mostrar',
+            'hide' => 'Ocultar',
+        ],
+    ],
+    'password_strength' => [
+        'title' => 'Fortaleza de la contrasena',
+        'empty' => 'Empieza a escribir una contrasena',
+        'weak' => 'Debil',
+        'medium' => 'Media',
+        'strong' => 'Fuerte',
+        'length' => 'Al menos 8 caracteres',
+        'mixed_case' => 'Letras mayusculas y minusculas',
+        'number' => 'Al menos un numero',
+        'symbol' => 'Al menos un simbolo',
     ],
     'status' => [
         'profile-information-updated' => 'Perfil actualizado correctamente.',

@@ -17,30 +17,6 @@
         <h1 class="{{ $titleClass }}">{{ __('frontend.auth.two_factor.headline') }}</h1>
         <p class="{{ $copyClass }}">{{ __('frontend.auth.two_factor.description') }}</p>
 
-        <form method="POST" action="{{ route('two-factor.login.store') }}" class="mt-8 space-y-4">
-            @csrf
-
-            <label class="{{ $labelClass }}">
-                <span>{{ __('frontend.auth.two_factor.code') }}</span>
-                <input
-                    type="text"
-                    name="code"
-                    inputmode="numeric"
-                    autocomplete="one-time-code"
-                    class="{{ $inputClass }}"
-                />
-            </label>
-            <x-input-error :messages="$errors->get('code')" />
-
-            <label class="{{ $labelClass }}">
-                <span>{{ __('frontend.auth.two_factor.recovery_code') }}</span>
-                <input type="text" name="recovery_code" class="{{ $inputClass }}" />
-            </label>
-            <x-input-error :messages="$errors->get('recovery_code')" />
-
-            <button type="submit" class="{{ $buttonClass }}">
-                {{ __('frontend.auth.two_factor.submit') }}
-            </button>
-        </form>
+        @livewire('auth.two-factor-challenge-form')
     </section>
 </x-layouts.app>

@@ -17,27 +17,6 @@
         <h1 class="{{ $titleClass }}">{{ __('frontend.auth.forgot_password.headline') }}</h1>
         <p class="{{ $copyClass }}">{{ __('frontend.auth.forgot_password.description') }}</p>
 
-        <form method="POST" action="{{ route('password.email') }}" class="mt-8 space-y-4">
-            @csrf
-
-            <x-auth-session-status :status="session('status')" />
-
-            <label class="{{ $labelClass }}">
-                <span>{{ __('frontend.auth.email') }}</span>
-                <input
-                    type="email"
-                    name="email"
-                    value="{{ old('email') }}"
-                    required
-                    autofocus
-                    class="{{ $inputClass }}"
-                />
-            </label>
-            <x-input-error :messages="$errors->get('email')" />
-
-            <button type="submit" class="{{ $buttonClass }}">
-                {{ __('frontend.auth.forgot_password.submit') }}
-            </button>
-        </form>
+        @livewire('auth.forgot-password-form')
     </section>
 </x-layouts.app>

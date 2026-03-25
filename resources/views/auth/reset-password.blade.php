@@ -15,50 +15,6 @@
         </p>
         <h1 class="{{ $titleClass }}">{{ __('frontend.auth.reset_password.headline') }}</h1>
 
-        <form method="POST" action="{{ route('password.update') }}" class="mt-8 space-y-4">
-            @csrf
-
-            <input type="hidden" name="token" value="{{ $request->route('token') }}" />
-
-            <label class="{{ $labelClass }}">
-                <span>{{ __('frontend.auth.email') }}</span>
-                <input
-                    type="email"
-                    name="email"
-                    value="{{ old('email', $request->email) }}"
-                    required
-                    autofocus
-                    class="{{ $inputClass }}"
-                />
-            </label>
-            <x-input-error :messages="$errors->get('email')" />
-
-            <label class="{{ $labelClass }}">
-                <span>{{ __('frontend.auth.password') }}</span>
-                <input
-                    type="password"
-                    name="password"
-                    required
-                    autocomplete="new-password"
-                    class="{{ $inputClass }}"
-                />
-            </label>
-            <x-input-error :messages="$errors->get('password')" />
-
-            <label class="{{ $labelClass }}">
-                <span>{{ __('frontend.auth.reset_password.confirm_password') }}</span>
-                <input
-                    type="password"
-                    name="password_confirmation"
-                    required
-                    autocomplete="new-password"
-                    class="{{ $inputClass }}"
-                />
-            </label>
-
-            <button type="submit" class="{{ $buttonClass }}">
-                {{ __('frontend.auth.reset_password.submit') }}
-            </button>
-        </form>
+        @livewire('auth.reset-password-form', ['token' => $request->route('token'), 'email' => (string) $request->email])
     </section>
 </x-layouts.app>

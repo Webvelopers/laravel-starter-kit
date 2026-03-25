@@ -1,70 +1,72 @@
-# Laravel 12 Starter Template
+# Laravel Starter Template
 
-Starter profesional para nuevos productos sobre Laravel 12, con autenticacion completa, roles tipados, preferencias de frontend, panel de administracion basico y tooling de calidad listo para trabajar.
+An opinionated Laravel starter for shipping new products faster. It includes a complete authentication flow, typed roles and capabilities, user-facing frontend preferences, a small admin area, and a quality toolchain that is ready for day-to-day development.
 
-## Resumen
+## Highlights
 
-- Laravel 12 + PHP 8.2+
-- Fortify sin Jetstream
-- Livewire 3 + Blade
-- Tailwind CSS 4 + Vite
-- Pest, PHPStan, Pint, Rector y Prettier
-- Localizacion `en` y `es`
-- Roles tipados: `admin` y `user`
-- Preferencias de frontend por usuario
-- Configuracion global tipada para verificacion humana en registro
+- Laravel 12 on PHP 8.2+
+- Fortify-based authentication without Jetstream
+- Livewire 3, Blade, Tailwind CSS 4, and Vite
+- Pest, PHPStan, Rector, Pint, and Prettier preconfigured
+- English and Spanish localization
+- Typed `admin` and `user` roles
+- Role capability management from the admin panel
+- Per-user locale and frontend template preferences
+- Configurable human verification during registration
 
-## Funcionalidades incluidas
+## Included Features
 
-- Landing publica en `/`
-- Dashboard para usuarios autenticados y verificados
-- Perfil de cuenta con:
-    - cambio de idioma
-    - seleccion de template visual
-    - actualizacion de nombre y email
-    - cambio de contrasena
-    - activacion de 2FA
-- Area de administracion en `/admin/settings`
-- Verificacion humana configurable para el registro
-- Galeria de templates y preview de estilos
+- Public landing page at `/`
+- Template gallery at `/templates` with preview pages
+- Authenticated dashboard for verified users
+- Account profile with:
+    - locale switching
+    - frontend template selection
+    - name and email updates
+    - password updates
+    - two-factor authentication
+- Admin settings page at `/admin/settings`
+- Global registration safeguards managed by administrators
+- Seeded demo users for local validation
 
-## Arquitectura actual
+## Tech Stack
 
 ### Backend
 
-- `app/Actions/Fortify` contiene las acciones de registro, perfil y password
-- `app/Enums/UserRole.php` define los roles del sistema
-- `app/Enums/AppSettingKey.php` centraliza claves tipadas de configuracion
-- `app/Http/Controllers` contiene endpoints declarativos y delgados
-- `app/Http/Requests` encapsula validacion HTTP
-- `app/Http/Middleware/EnsureUserHasRole.php` protege rutas por rol
-- `app/Http/Middleware/SetLocale.php` resuelve locale, template y estado compartido de frontend
-- `app/Models/UserFrontendPreference.php` separa preferencias visuales del modelo `User`
-- `app/Models/AppSetting.php` expone una API tipada para settings globales
+- `app/Actions/Fortify` contains registration, profile, and password actions
+- `app/Enums/UserRole.php` defines the system roles
+- `app/Enums/AppSettingKey.php` centralizes typed application setting keys
+- `app/Http/Controllers` keeps route handlers thin and focused
+- `app/Http/Requests` encapsulates request validation
+- `app/Http/Middleware/EnsureUserHasRole.php` protects role-based routes
+- `app/Http/Middleware/SetLocale.php` resolves shared locale and frontend state
+- `app/Models/AppSetting.php` exposes typed access to global settings
+- `app/Support/RoleCapabilityMatrix.php` manages configurable role capabilities
 
 ### Frontend
 
-- Blade-first, sin SPA innecesaria
-- Layout principal en `resources/views/components/layouts/app.blade.php`
-- Pantallas de auth personalizadas en `resources/views/auth`
-- Dashboard en `resources/views/dashboard.blade.php`
-- Perfil en `resources/views/profile.blade.php`
-- Ajustes de administracion en `resources/views/admin/settings.blade.php`
+- Blade-first architecture without unnecessary SPA complexity
+- Main application shell in `resources/views/components/layouts/app.blade.php`
+- Custom auth screens in `resources/views/auth`
+- Dashboard in `resources/views/dashboard.blade.php`
+- Profile screen in `resources/views/profile.blade.php`
+- Admin settings in `resources/views/admin/settings.blade.php`
+- Template gallery and previews in `resources/views/templates`
 
-### Datos y seeders
+### Data and Seeders
 
-- `database/seeders/AdminUserSeeder.php` crea perfiles administrativos
-- `database/seeders/StandardUserSeeder.php` crea perfiles de usuario estandar
-- `database/seeders/DatabaseSeeder.php` compone ambos seeders
+- `database/seeders/AdminUserSeeder.php` creates admin accounts
+- `database/seeders/StandardUserSeeder.php` creates standard user accounts
+- `database/seeders/DatabaseSeeder.php` runs the starter seed set
 
-## Requisitos
+## Requirements
 
-- PHP 8.2 o superior
+- PHP 8.2 or newer
 - Composer
-- Node.js + npm
-- SQLite habilitado en PHP
+- Node.js and npm
+- SQLite enabled in PHP
 
-## Instalacion rapida
+## Quick Start
 
 ```bash
 cp .env.example .env
@@ -75,56 +77,61 @@ php artisan key:generate
 php artisan migrate --seed
 ```
 
-Iniciar entorno local:
+Start the local development environment:
 
 ```bash
 composer run dev
 ```
 
-## Usuarios seed por defecto
+This script starts the Laravel server, queue listener, log tailing, and Vite together.
 
-Credenciales de demo para validacion funcional local:
+## Demo Users
 
-### Administradores
+Use these accounts after seeding the database.
+
+### Administrators
 
 - `starter@example.com` / `password`
 - `ops-admin@example.com` / `password`
 
-### Usuarios estandar
+### Standard Users
 
 - `member@example.com` / `password`
 - `analyst@example.com` / `password`
 
-Ademas se generan usuarios fake adicionales con rol `user`.
+Additional fake users are also seeded with the `user` role.
 
-## Roles y acceso
+## Roles and Access Rules
 
-El sistema usa un enum tipado para roles:
+The starter uses typed roles backed by `App\Enums\UserRole`.
 
-- `admin`: acceso a configuracion administrativa global
-- `user`: acceso normal a dashboard y perfil
+- `admin`: full access to administrative settings and protected role management
+- `user`: standard access to the authenticated application area
 
-Reglas actuales:
+Current route rules:
 
-- solo usuarios autenticados y verificados entran a `/dashboard` y `/profile`
-- solo usuarios con rol `admin` entran a `/admin/settings`
-- solo `admin` puede cambiar la verificacion humana global del registro
+- only authenticated and verified users can access `/dashboard` and `/profile`
+- only authenticated and verified admins can access `/admin/settings`
+- only admins can change the global registration safeguard setting
+- only admins can update configurable capabilities for a role
 
-## Configuracion global
+## Global Settings
 
-Hoy existe una configuracion de aplicacion persistida:
+The application currently persists these starter-level settings:
 
 - `registration_human_verification_enabled`
+- `role_capabilities`
 
-Se consume desde `AppSetting` con acceso tipado y afecta:
+These settings are consumed through typed accessors and affect:
 
-- render del captcha en registro
-- validacion del registro
-- pantalla administrativa
+- registration form rendering
+- registration validation
+- admin configuration screens
+- effective role permissions across the app
 
-## Comandos utiles
+## Useful Commands
 
-### Desarrollo
+### Development
 
 ```bash
 composer run dev
@@ -132,7 +139,7 @@ php artisan serve
 npm run dev
 ```
 
-### Base de datos
+### Database
 
 ```bash
 php artisan migrate
@@ -142,31 +149,24 @@ php artisan db:seed --class=AdminUserSeeder
 php artisan db:seed --class=StandardUserSeeder
 ```
 
-### Calidad
+### Linting and Static Analysis
 
 ```bash
 ./vendor/bin/pint --test
 npm run lint
 composer run phpstan
+composer run test:refactor
+```
+
+### Tests
+
+```bash
 ./vendor/bin/pest
+composer run pest
 composer run test
 ```
 
-## Testing
-
-El proyecto incluye cobertura para:
-
-- auth flow
-- pages auth
-- dashboard y profile
-- acceso admin
-- seeders
-- locale
-- galeria de templates
-- 2FA
-- modelo `User`
-
-Ejemplos:
+## Running Focused Tests
 
 ```bash
 ./vendor/bin/pest tests/Feature/AdminAccessTest.php
@@ -174,26 +174,27 @@ Ejemplos:
 ./vendor/bin/pest --filter="global human verification"
 ```
 
-## Convenciones del proyecto
+## Project Conventions
 
-- `User` queda cercano al baseline de Laravel y solo contiene logica de identidad/autorizacion esencial
-- las preferencias visuales no viven en `User`, sino en `UserFrontendPreference`
-- las validaciones HTTP viven en `FormRequest`
-- los roles usan enum, no strings dispersos por el codigo
-- los settings globales usan claves tipadas, no magic strings sueltos
-- los lockfiles se versionan
+- Keep `User` close to Laravel defaults and move extra behavior into dedicated classes
+- Store frontend preferences outside the `User` model when they are not identity-related
+- Prefer `FormRequest` classes for HTTP validation
+- Use enums for roles and typed keys for global settings
+- Version lockfiles and keep the quality toolchain reproducible
 
-## Estructura recomendada para extender
+## Recommended Read Order
 
-Si vas a seguir creciendo este starter, el orden sugerido es:
+If you are new to the codebase, start here:
 
-1. adaptar branding y copy de landing/dashboard
-2. definir tus entidades de dominio
-3. ampliar permisos sobre la base de roles existente
-4. mover settings globales a modulos mas especificos si el dominio crece
-5. agregar CI para lint, analisis y tests
+1. `composer.json`
+2. `package.json`
+3. `routes/web.php`
+4. `app/Providers/FortifyServiceProvider.php`
+5. `app/Actions/Fortify`
+6. `resources/views`
+7. `tests`
 
-## Verificacion recomendada antes de entregar cambios
+## Recommended Verification Before Shipping Changes
 
 ```bash
 ./vendor/bin/pint --test
@@ -205,8 +206,8 @@ npm run build
 
 ## Changelog
 
-Consulta `CHANGELOG.md` para el historial funcional del starter.
+See `CHANGELOG.md` for the functional history of the starter.
 
-## Licencia
+## License
 
-MIT, siguiendo la base del ecosistema Laravel, salvo que tu proyecto derivado defina otra.
+This project is released under the MIT license unless your derived product adopts a different license.

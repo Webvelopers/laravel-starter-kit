@@ -43,7 +43,7 @@ final class RoleCapabilityMatrix
             $configured = $stored[$role->value] ?? $defaults[$role->value];
 
             $matrix[$role->value] = is_array($configured)
-                ? array_values(array_filter($configured, static fn (mixed $capability): bool => is_string($capability)))
+                ? array_values(array_filter($configured, is_string(...)))
                 : $defaults[$role->value];
         }
 

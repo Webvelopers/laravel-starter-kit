@@ -23,7 +23,7 @@ final class EnsureUserHasRole
 
         /** @var list<UserRole> $allowedRoles */
         $allowedRoles = array_values(array_map(
-            static fn (string $role): UserRole => UserRole::from($role),
+            UserRole::from(...),
             $roles,
         ));
 

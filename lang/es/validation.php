@@ -165,10 +165,10 @@ return [
         'email' => 'correo electronico',
         'name' => 'nombre',
         'password' => 'contrasena',
-        'password_confirmation' => 'confirmacion de contrasena',
-        'current_password' => 'contrasena actual',
+        'password_confirmation' => 'Confirmar contraseña',
+        'current_password' => 'contraseña actual',
         'code' => 'codigo',
-        'recovery_code' => 'codigo de recuperacion',
+        'recovery_code' => 'codigo de recuperación',
         'locale' => 'idioma',
     ],
 ];

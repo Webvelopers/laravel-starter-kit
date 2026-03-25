@@ -17,24 +17,6 @@
         <h1 class="{{ $titleClass }}">{{ __('frontend.auth.confirm_password.headline') }}</h1>
         <p class="{{ $copyClass }}">{{ __('frontend.auth.confirm_password.description') }}</p>
 
-        <form method="POST" action="{{ route('password.confirm.store') }}" class="mt-8 space-y-4">
-            @csrf
-
-            <label class="{{ $labelClass }}">
-                <span>{{ __('frontend.auth.password') }}</span>
-                <input
-                    type="password"
-                    name="password"
-                    required
-                    autocomplete="current-password"
-                    class="{{ $inputClass }}"
-                />
-            </label>
-            <x-input-error :messages="$errors->get('password')" />
-
-            <button type="submit" class="{{ $buttonClass }}">
-                {{ __('frontend.auth.confirm_password.submit') }}
-            </button>
-        </form>
+        @livewire('auth.confirm-password-form')
     </section>
 </x-layouts.app>

@@ -274,6 +274,21 @@ return [
             'recovery_code' => 'Recovery code',
             'submit' => 'Validate access',
         ],
+        'password_toggle' => [
+            'show' => 'Show',
+            'hide' => 'Hide',
+        ],
+    ],
+    'password_strength' => [
+        'title' => 'Password strength',
+        'empty' => 'Start typing a password',
+        'weak' => 'Weak',
+        'medium' => 'Medium',
+        'strong' => 'Strong',
+        'length' => 'At least 8 characters',
+        'mixed_case' => 'Uppercase and lowercase letters',
+        'number' => 'At least one number',
+        'symbol' => 'At least one symbol',
     ],
     'status' => [
         'profile-information-updated' => 'Profile updated successfully.',

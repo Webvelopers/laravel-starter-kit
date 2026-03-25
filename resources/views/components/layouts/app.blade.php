@@ -1,22 +1,7 @@
 @php
-    $isShadcn = ($frontendTemplate ?? 'default') === 'shadcn';
-    $headerClass = 'mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6 lg:px-8';
-
-    if ($isShadcn) {
-        $resolvedBodyClass = $bodyClass ?? 'min-h-screen bg-[linear-gradient(180deg,_#f8fafc_0%,_#ffffff_100%)] font-sans text-slate-900';
-        $brandClass = 'flex items-center gap-3 text-sm font-medium tracking-[0.18em] text-slate-700 uppercase';
-        $brandBadgeClass = 'inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-sm font-medium text-slate-900 shadow-sm';
-        $navClass = 'flex items-center gap-3 text-sm font-medium text-slate-600';
-        $navLinkClass = 'rounded-md px-4 py-2 transition hover:bg-white hover:text-slate-950';
-        $primaryNavButtonClass = 'rounded-md bg-slate-950 px-4 py-2 text-white transition hover:bg-slate-800';
-    } else {
-        $resolvedBodyClass = $bodyClass ?? 'min-h-screen bg-[radial-gradient(circle_at_top,_rgba(217,119,6,0.18),_transparent_32%),linear-gradient(180deg,_#fffdf8_0%,_#fff7ed_100%)] font-sans text-stone-900';
-        $brandClass = 'flex items-center gap-3 text-sm font-semibold tracking-[0.24em] text-stone-700 uppercase';
-        $brandBadgeClass = 'font-display inline-flex h-10 w-10 items-center justify-center rounded-full bg-stone-900 text-base text-amber-100';
-        $navClass = 'flex items-center gap-3 text-sm font-medium text-stone-600';
-        $navLinkClass = 'rounded-full px-4 py-2 transition hover:bg-white/70 hover:text-stone-950';
-        $primaryNavButtonClass = 'rounded-full bg-stone-900 px-4 py-2 text-amber-50 transition hover:bg-stone-700';
-    }
+    $template = ($frontendTemplate ?? 'default') === 'shadcn' ? 'shadcn' : 'default';
+    $templateCss = "resources/css/templates/{$template}.css";
+    $resolvedBodyClass = trim('template-' . $template . ' ' . ($bodyClass ?? ''));
 @endphp
 
 <!DOCTYPE html>
@@ -33,57 +18,52 @@
             rel="stylesheet"
         />
         @stack('head')
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', $templateCss, 'resources/js/app.js'])
         @livewireStyles
     </head>
     <body class="{{ $resolvedBodyClass }}">
-        <div class="min-h-screen">
-            <header class="{{ $headerClass }}">
-                <a href="{{ route('home') }}" class="{{ $brandClass }}">
-                    <span class="{{ $brandBadgeClass }}">L12</span>
+        <div class="app-shell">
+            <header class="app-header">
+                <a href="{{ route('home') }}" class="app-brand">
+                    <span class="app-brand-badge">L12</span>
                     <span>{{ config('app.name') }}</span>
                 </a>
 
-                <nav class="{{ $navClass }}">
-                    <a href="{{ route('home') }}" class="{{ $navLinkClass }}">
+                <nav class="app-nav">
+                    <a href="{{ route('home') }}" class="app-nav-link">
                         {{ __('frontend.nav.home') }}
                     </a>
-                    <a href="{{ route('templates.index') }}" class="{{ $navLinkClass }}">
+                    <a href="{{ route('templates.index') }}" class="app-nav-link">
                         {{ __('frontend.nav.templates') }}
                     </a>
 
                     @auth
-                        <a href="{{ route('dashboard') }}" class="{{ $navLinkClass }}">
+                        <a href="{{ route('dashboard') }}" class="app-nav-link">
                             {{ __('frontend.nav.dashboard') }}
                         </a>
                         @if (($currentUserRole ?? null)?->isAdmin())
-                            <a href="{{ route('admin.settings') }}" class="{{ $navLinkClass }}">
+                            <a href="{{ route('admin.settings') }}" class="app-nav-link">
                                 {{ __('frontend.nav.admin') }}
                             </a>
                         @endif
 
-                        <a href="{{ route('profile') }}" class="{{ $navLinkClass }}">
+                        <a href="{{ route('profile') }}" class="app-nav-link">
                             {{ __('frontend.nav.profile') }}
                         </a>
 
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="{{ $primaryNavButtonClass }}">
-                                {{ __('frontend.nav.logout') }}
-                            </button>
-                        </form>
+                        @livewire('shared.logout-button', ['label' => __('frontend.nav.logout'), 'class' => 'primary-button'], key('layout-logout'))
                     @else
-                        <a href="{{ route('login') }}" class="{{ $navLinkClass }}">
+                        <a href="{{ route('login') }}" class="app-nav-link">
                             {{ __('frontend.nav.login') }}
                         </a>
-                        <a href="{{ route('register') }}" class="{{ $primaryNavButtonClass }}">
+                        <a href="{{ route('register') }}" class="primary-button">
                             {{ __('frontend.nav.register') }}
                         </a>
                     @endauth
                 </nav>
             </header>
 
-            <main class="mx-auto w-full max-w-6xl px-6 pb-16 lg:px-8">
+            <main class="app-main">
                 {{ $slot }}
             </main>
         </div>

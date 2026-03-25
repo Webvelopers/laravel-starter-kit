@@ -19,7 +19,7 @@ final class UserRoleAssignment extends Model
 
     public static function roleFor(?User $user): UserRole
     {
-        if ($user === null) {
+        if (! $user instanceof User) {
             return UserRole::User;
         }
 

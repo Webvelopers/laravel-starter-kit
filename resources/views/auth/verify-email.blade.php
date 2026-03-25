@@ -16,24 +16,6 @@
         <h1 class="{{ $titleClass }}">{{ __('frontend.auth.verify_email.headline') }}</h1>
         <p class="{{ $copyClass }}">{{ __('frontend.auth.verify_email.description') }}</p>
 
-        <div class="mt-8 space-y-4">
-            <x-auth-session-status
-                :status="session('status') === 'verification-link-sent' ? __('frontend.auth.verify_email.resent') : null"
-            />
-
-            <form method="POST" action="{{ route('verification.send') }}">
-                @csrf
-                <button type="submit" class="{{ $buttonClass }}">
-                    {{ __('frontend.auth.verify_email.submit') }}
-                </button>
-            </form>
-
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="{{ $linkClass }}">
-                    {{ __('frontend.auth.verify_email.logout') }}
-                </button>
-            </form>
-        </div>
+        @livewire('auth.verify-email-actions')
     </section>
 </x-layouts.app>
