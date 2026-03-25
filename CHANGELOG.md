@@ -2,7 +2,7 @@
 
 All notable changes to this project are documented in this file.
 
-The format follows Keep a Changelog and the project uses Semantic Versioning as a practical reference for starter evolution.
+The format follows Keep a Changelog and the project uses Semantic Versioning as a practical reference for Laravel Starter Kit evolution.
 
 ## [Unreleased]
 
@@ -28,7 +28,7 @@ The format follows Keep a Changelog and the project uses Semantic Versioning as 
 
 - Obsolete migration for `frontend_template` in `users`.
 - Empty `AppServiceProvider` registration.
-- Redundant starter feature test file and unused template wrapper component.
+- Redundant Starter Kit feature test file and unused template wrapper component.
 - Unused frontend dependencies and bootstrap script.
 
 ### Fixed
@@ -41,6 +41,6 @@ The format follows Keep a Changelog and the project uses Semantic Versioning as 
 
 ### Added
 
-- Initial Laravel starter structure.
+- Initial Laravel Starter Kit structure.
 - Base project configuration.
 - Core authentication scaffolding.

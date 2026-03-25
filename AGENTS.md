@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This file guides coding agents working in this Laravel 12 starter template.
+This file guides coding agents working in this Laravel Starter Kit.
 
 ## Project Snapshot
 

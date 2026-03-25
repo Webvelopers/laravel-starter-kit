@@ -20,6 +20,6 @@ it('renders the landing page in english when the session locale is english', fun
     withSession(['locale' => 'en'])
         ->get(route('home'))
         ->assertOk()
-        ->assertSee('Laravel 12 starter kit')
+        ->assertSee('Laravel Starter Kit')
         ->assertSee('Read documentation');
 });

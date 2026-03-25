@@ -1,6 +1,6 @@
-# Laravel Starter Template
+# Laravel Starter Kit
 
-An opinionated Laravel starter for shipping new products faster. It includes a complete authentication flow, typed roles and capabilities, user-facing frontend preferences, a small admin area, and a quality toolchain that is ready for day-to-day development.
+An opinionated Laravel Starter Kit for shipping new products faster. It includes a complete authentication flow, typed roles and capabilities, user-facing frontend preferences, a small admin area, and a quality toolchain that is ready for day-to-day development.
 
 ## Highlights
 
@@ -11,17 +11,17 @@ An opinionated Laravel starter for shipping new products faster. It includes a c
 - English and Spanish localization
 - Typed `admin` and `user` roles
 - Role capability management from the admin panel
-- Per-user locale and frontend template preferences
+- Per-user locale and frontend presentation preferences
 - Configurable human verification during registration
 
 ## Included Features
 
 - Public landing page at `/`
-- Template gallery at `/templates` with preview pages
+- Starter Kit style gallery at `/templates` with preview pages
 - Authenticated dashboard for verified users
 - Account profile with:
     - locale switching
-    - frontend template selection
+    - frontend style selection
     - name and email updates
     - password updates
     - two-factor authentication
@@ -51,13 +51,13 @@ An opinionated Laravel starter for shipping new products faster. It includes a c
 - Dashboard in `resources/views/dashboard.blade.php`
 - Profile screen in `resources/views/profile.blade.php`
 - Admin settings in `resources/views/admin/settings.blade.php`
-- Template gallery and previews in `resources/views/templates`
+- Starter Kit style gallery and previews in `resources/views/templates`
 
 ### Data and Seeders
 
 - `database/seeders/AdminUserSeeder.php` creates admin accounts
 - `database/seeders/StandardUserSeeder.php` creates standard user accounts
-- `database/seeders/DatabaseSeeder.php` runs the starter seed set
+- `database/seeders/DatabaseSeeder.php` runs the Starter Kit seed set
 
 ## Requirements
 
@@ -103,7 +103,7 @@ Additional fake users are also seeded with the `user` role.
 
 ## Roles and Access Rules
 
-The starter uses typed roles backed by `App\Enums\UserRole`.
+Laravel Starter Kit uses typed roles backed by `App\Enums\UserRole`.
 
 - `admin`: full access to administrative settings and protected role management
 - `user`: standard access to the authenticated application area
@@ -117,7 +117,7 @@ Current route rules:
 
 ## Global Settings
 
-The application currently persists these starter-level settings:
+The application currently persists these Starter Kit-level settings:
 
 - `registration_human_verification_enabled`
 - `role_capabilities`
@@ -206,7 +206,7 @@ npm run build
 
 ## Changelog
 
-See `CHANGELOG.md` for the functional history of the starter.
+See `CHANGELOG.md` for the functional history of Laravel Starter Kit.
 
 ## License
 
